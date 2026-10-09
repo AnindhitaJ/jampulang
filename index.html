@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="id"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="favicon-32.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="theme-color" content="#2a1a36">
+<title>Jam Pulang Terakhir</title>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700&family=Newsreader:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#fff4e6;--dusk:#2a1a36;--amber:#f2a65a;--rose:#e0758a;--panel:rgba(32,18,42,.92);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{height:100%;scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{height:100%;margin:0;background:#1a0f24;color:var(--ink);font-family:'Newsreader',Georgia,serif;font-size:18px}
+#app{height:100%;max-width:480px;margin:0 auto;position:relative;overflow:hidden;background:var(--dusk)}
+h1,h2,button{font-family:'Bricolage Grotesque',system-ui,sans-serif}
+.scr{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:28px;text-align:center;gap:14px;background:linear-gradient(180deg,#f2a65a 0%,#d9738a 45%,#2a1a36 100%)}
+.scr h1{font-size:44px;line-height:1.02;margin:0;letter-spacing:-.02em;text-shadow:0 2px 0 rgba(42,26,54,.35)}
+.scr p{margin:0 0 18px;font-style:italic}
+.btn{min-height:50px;width:100%;max-width:300px;border:2px solid var(--ink);background:rgba(42,26,54,.55);color:var(--ink);font-size:17px;font-weight:700;border-radius:14px;padding:12px 18px;cursor:pointer}
+.btn.p{background:var(--ink);color:var(--dusk)}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+.btn:focus-visible,input:focus-visible{outline:3px solid #fff;outline-offset:2px}
+input{width:100%;max-width:300px;min-height:50px;font:inherit;font-size:20px;text-align:center;border-radius:14px;border:2px solid var(--ink);background:rgba(42,26,54,.55);color:var(--ink);padding:10px}
+input::placeholder{color:#fff4e6aa}
+.g{position:absolute;inset:0;display:flex;flex-direction:column}
+.rk{position:absolute;top:8%;left:50%;transform:translateX(-50%);height:128%;width:auto;max-width:none;pointer-events:none}
+.rk.ny{top:18%;height:118%}
+.stage{overflow:hidden;flex:1;position:relative;transition:background .6s}
+.bg-gate{background:linear-gradient(#ffd8a8,#f2a65a 60%,#8a5a4a)}.bg-class{background:linear-gradient(#fff0d0,#e8c9a0 70%,#9a7a5a)}.bg-hall{background:linear-gradient(#f7c999,#c98a6a 70%,#5a3a4a)}
+.bg-canteen{background:linear-gradient(#ffe3b3,#e09a5a 70%,#7a4a3a)}.bg-rain{background:linear-gradient(#6a7a96,#3a4a66 70%,#1e2a3e)}.bg-aula{background:linear-gradient(#e0758a,#7a3a5a 70%,#2a1a36)}.bg-dusk{background:linear-gradient(#f2a65a,#b0587a 55%,#2a1a36)}
+.sp{position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:150px;height:62%;border-radius:80px 80px 0 0;opacity:.88;display:flex;align-items:flex-start;justify-content:center;padding-top:26px;font:700 38px 'Bricolage Grotesque';color:rgba(255,255,255,.85)}
+.sp.R{background:linear-gradient(#5a6a8a,#3a4560)}.sp.Y{background:linear-gradient(#e0758a,#a0485e)}
+.top{position:absolute;top:10px;right:10px;z-index:3;min-height:44px;min-width:44px;border-radius:12px;border:1px solid #fff8;background:#2a1a3688;color:var(--ink);font-size:15px}
+.dlg{background:var(--panel);padding:20px 20px 24px;min-height:170px;border-top:3px solid var(--amber);cursor:pointer;position:relative}
+.nm{position:absolute;top:-17px;left:16px;background:var(--amber);color:var(--dusk);font:700 15px 'Bricolage Grotesque';padding:4px 14px;border-radius:10px}
+.tx{line-height:1.5;font-size:19px;margin:6px 0 0}.tx.n{font-style:italic;color:#ffe3c4}
+.nx{position:absolute;right:16px;bottom:8px;color:var(--amber);font-size:14px}
+.ch{position:absolute;inset:0;background:#1a0f24aa;display:flex;flex-direction:column;justify-content:center;gap:12px;padding:24px;z-index:4}
+.ch .btn{max-width:none;text-align:left;font-family:'Newsreader',serif;font-size:19px;font-weight:600;background:var(--panel)}
+.ov{position:absolute;inset:0;background:#1a0f24ee;z-index:6;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:28px;text-align:center}
+.row{display:flex;gap:8px;width:100%;max-width:300px;align-items:center;justify-content:space-between}
+.row .btn{min-height:44px;width:auto;flex:1;padding:8px}.row .btn.on{background:var(--ink);color:var(--dusk)}
+@media (prefers-reduced-motion:reduce){.stage{transition:none}}
+</style></head><body><div id="app"></div>
+<script>
+const S={
+s0:{bg:'gate',n:'s1',l:[['N','Senin pagi. Hari pertama semester baru.'],['N','Kelas sebelas. Aku punya tiga target: nilai lebih bagus, tidak ikut banyak kegiatan, dan pulang tepat waktu.'],['Y','{P}—!'],['P','Jangan panggil keras-keras.'],['Y','Kenapa?'],['P','Orang-orang lihat.'],['Y','Ya biarin.'],['P','Malu.'],['Y','Lo tuh aneh.'],['P','Terima kasih.'],['Y','Itu bukan pujian.'],['P','Tetap gue terima.'],['N','Kami berjalan menuju kelas. Gerbang masih ramai: seragam yang masih kaku, orang tua yang berfoto di depan papan nama sekolah.'],['Y','Semester ini kita sekelas lagi. Takdir.'],['P','Itu namanya daftar kelas.'],['Y','Lo nggak romantis banget.'],['P','Gue realistis.'],['Y','Lo tuh kalau ngomong...'],['P','Apa?'],['Y','Nggak jadi. Becanda!'],['N','Bel berbunyi. Kalau semuanya sesuai rencana, semester ini akan membosankan. Aku suka itu.']]},
+s1:{bg:'class',n:'s2',l:[['N','Bu Wulan masuk membawa selembar kertas. Festival Arunika butuh panitia tambahan.'],['Y','Lo daftar ya. Please.'],['P','Gue mau pulang tepat waktu, Nay.'],['Y','Divisi acara aja. Cuma bantu-bantu.'],['P','Cuma bantu-bantu itu biasanya jadi tiap hari.'],['Y','Lo pesimis banget.'],['P','Gue berpengalaman.'],['N','Bu Wulan menepuk meja. Yang sudah tercatat diminta menemui ketua panitia sepulang sekolah.'],['N','Namaku sudah tertulis di kertas itu sebelum aku sempat membantah. Naya tersenyum puas.']],
+ c:[['Ambil pulpen. "Yaudah, sekali ini."',7,['Y','Nah gitu dong!']],['"Lo yang daftarin, lo yang temenin gue."',3,['Y','Deal. Tapi gue cuma ikut sampai kantin.']],['Coret namaku. "Gue nggak ikut."',-2,['Y','Telat. Udah dicatat Bu Wulan.']]]},
+s2:{bg:'hall',n:'s2b',l:[['N','Sore itu aku disuruh ke ruang OSIS. Di lorong, seorang cowok bersandar di dinding sambil membaca daftar nama.'],['R','Lo {P}?'],['P','Iya.'],['R','Gue Raka.'],['P','Gue tahu.'],['R','Oh.'],['P','Satu angkatan.'],['R','Berarti gue terkenal.'],['P','Jangan geer.'],['R','Telat.'],['P','Lo butuh apa?'],['R','Briefing besok. Jam tiga.'],['P','Sampai jam berapa?'],['R','Belum tahu.'],['P','Jawaban lo nggak meyakinkan.'],['R','Kalau gue bilang sebentar, lo percaya?']],
+ c:[['"Percaya aja deh."',7,['R','Bagus. Gue tunggu.']],['"Nggak."',3,['R','Berarti lo harus datang buat memastikan.']],['"Kenapa harus gue yang percaya?"',0,['R','Karena nama lo ada di daftar. Itu aja.']]]},
+s3:{bg:'sunset',n:'s3b',l:[['N','Briefing molor sampai hampir jam enam. Yang lain sudah pulang. Tinggal aku dan Raka di ruang OSIS, dengan tumpukan proposal.'],['R','Lo ngantuk?'],['P','Nggak.'],['R','Mata lo bilang iya.'],['P','Mata gue nggak ditanya.'],['R','Ini kursi lo.'],['P','Kenapa?'],['R','Biar lo nggak duduk di lantai.'],['N','Aku pura-pura sibuk dengan kertas. Padahal aku sadar, kursi itu disisihkan sejak awal.']],
+ c:[['"Makasih. Lo ternyata perhatian juga."',8,['R','Jangan bilang siapa-siapa.']],['"Lo nyuruh gue duduk atau mau jadi bos?"',3,['R','Dua-duanya.']],['"Gue bisa ambil sendiri."',1,['R','Gue tahu lo bisa sendiri.']]]},
+s4:{bg:'canteen',n:'s4b',l:[['N','Rapat sepulang sekolah jadi kebiasaan. Begitu juga makan di kantin bareng Naya.'],['N','Raka tiba-tiba meletakkan segelas es jeruk di mejaku.'],['R','Lo nggak suka teh manis, kan?'],['P','Kok lo tahu?'],['R','Kemarin lo nggak minum.'],['N','Naya menatapku. Lalu Raka. Lalu aku lagi.'],['Y','Muka lo kelihatan banget, tau.'],['P','Kelihatan apa?'],['Y','Lo suka dia.']],
+ c:[['"Mungkin... sedikit."',9,['Y','GUE TAHU!']],['Diam, pura-pura minum.',3,['Y','Itu jawaban "iya" namanya.']],['"Apaan sih, nggak lah."',1,['Y','Telinga lo merah.']]]},
+s5:{bg:'rain',n:'s5b',l:[['N','Hujan turun deras tepat saat kami keluar gerbang. Aku lupa bawa payung.'],['R','Pakai ini.'],['P','Lo gimana?'],['R','Gue bisa lari.'],['N','Raka membuka payung dan mengangkatnya sedikit ke arahku.']],
+ c:[['"Makasih."',8,['R','Yaudah, sini. Jangan lewat sana. Licin.']],['"Bayarnya berapa?"',3,['R','Nanti gue pikirin.']],['"Gue bisa sendiri."',0,['R','Gue tahu. Gue cuma mau nemenin.']]]},
+s6:{bg:'aula',n:'s6b',l:[['N','Besoknya, payung itu kukembalikan di depan ruang OSIS. Sudah kulipat rapi dan kukeringkan semalaman.'],['R','Lo beneran balikin.'],['P','Katanya besok balikin.'],['R','Gue kira lo bakal lupa.'],['P','Gue nggak suka punya utang.'],['R','Jadi lo ngerasa utang?'],['P','Sedikit.'],['R','Bagus.'],['P','Bagus?'],['R','Berarti masih ada alasan lo nyariin gue.'],['N','Aku pura-pura tidak mendengar. Tapi tanganku terlanjur menggenggam tali tas terlalu erat.'],['Y','Gue lihat semuanya dari jendela kelas.'],['P','Nay!'],['Y','Bukan salah gue. Salah jendelanya.'],['N','Hari-hari berlalu cepat. Poster dicetak, tiket dijual, dan jam pulangku mundur sedikit demi sedikit.'],['N','Dua hari sebelum festival, panggung utama ternyata dobel-booked dengan ekskul band. Semua panik, kecuali Raka yang terlalu diam.'],['Y','Lo kok tenang banget sih?!'],['R','Gue nggak tenang.'],['N','Aku baru sadar tangannya mengepal di balik saku.'],['R','Gue takut ngecewain semua orang.'],['R','Aneh ya, ketua panitia ngomong gini?'],['R','Lo hari ini beda.',20],['P','Beda gimana?',20],['R','Lebih diem.',20],['P','Lo merhatiin?',20],['R','Iya.',20]],
+ c:[['"Lo nggak sendirian. Kita cari jalan bareng."',9,['R','...Oke. Makasih.']],['"Ketua nggak boleh nyerah. Ayo mikir."',3,['R','Galak amat.']],['"Jangan cengeng, selesaiin aja."',-2,['R','Iya, iya.']]]},
+s7:{bg:'aula',n:'@end',l:[['N','Panggung terbagi dua sesi dan semuanya lancar. Lampion menyala saat matahari turun.'],['Y','Gue nggak percaya kita berhasil!'],['N','Naya berlari pergi sambil mengedipkan sebelah mata ke arahku.'],['N','Setelah acara, aula kosong. Aku menemukan Raka duduk di tepi panggung.'],['R','Lo belum pulang?'],['P','Lo sendiri?'],['R','Gue nungguin.'],['P','Nungguin apa?'],['R','Aula kosong. Dari tadi rame banget, kepala gue berisik.'],['P','Sekarang?'],['R','Sekarang lebih tenang.'],['N','Kami duduk berdampingan. Lampion di langit-langit aula bergoyang pelan.'],['P','Lo capek?'],['R','Banget. Tapi anehnya, gue nggak buru-buru pulang.'],['R','Besok jangan langsung pulang.',30],['P','Kenapa?',30],['R','Gue mau ngomong sesuatu.',30],['P','Tentang?',30],['R','Nanti.',30],['R','Kalau gue bilang gue sengaja nungguin lo, lo percaya?']],
+ c:[['"Percaya."',10,['R','Berarti gue nggak harus nebak-nebak.']],['"Kalau lo kasih alasannya."',6,['R','Nanti. Pelan-pelan.']],['"Enggak."',2,['R','Yaudah. Berarti gue harus lebih jelas.']]]},
+s3b:{bg:'sunset',n:'s4',l:[['N','Hari-hari berikutnya kami selalu kebagian tugas yang sama: menempel jadwal, menghitung kursi, memastikan sound system tidak mati.'],['P','Lo nggak punya anak buah lain?'],['R','Punya. Tapi mereka nggak teliti.'],['P','Dan gue teliti?'],['R','Lo ngomel kalau salah.'],['P','Itu bukan pujian.'],['R','Itu pujian.'],['N','Raka menunduk, pura-pura mencatat. Sudut bibirnya naik sedikit.'],['R','Telinga lo merah.'],['P','Gerah.'],['R','AC nyala.'],['P','...Rusak mungkin.']],
+ c:[['"Oke, gue agak malu."',8,['R','Bagus. Berarti gue nggak sendirian.']],['"Ngomong sekali lagi, gue lempar proposal."',3,['R','Silakan. Gue siap.']],['"Fokus kerja, Raka."',0,['R','Siap, Bu Ketua.']]]},
+s4b:{bg:'sunset',n:'s5',l:[['N','Naya muncul di ruang OSIS dengan alasan mengantar fotokopian. Fotokopiannya cuma satu lembar.'],['Y','Halo, Kak Ketua. Gue bawa ini.'],['R','Makasih.'],['Y','Lo suka es jeruk, kan, {P}?'],['P','Nay.'],['Y','Gue cuma nanya!'],['N','Naya mengamati Raka menggeser kursinya supaya dekat denganku. Dia sadar. Aku juga.'],['Y','Dia nyimpen kursi buat lo lagi.'],['P','Diam.'],['Y','Gue nggak bilang apa-apa. Tapi muka lo bilang banyak.'],['N','Aku menutup wajah dengan proposal.']]},
+s5b:{bg:'cgumb',n:'s6',l:[['N','Payung itu terlalu kecil untuk dua orang. Bahu kiri Raka basah, tapi dia tidak bilang apa-apa.'],['P','Rumah lo arah sini?'],['R','Enggak.'],['P','Terus?'],['R','Gue nemenin lo.'],['N','Kami berhenti di halte. Hujan makin deras.'],['P','Bahu lo basah.'],['R','Nggak apa-apa. Gue senang kalau lo ada.'],['P','Kenapa?'],['R','Nggak tahu.'],['N','Jantungku berisik. Kupikir itu gara-gara hujan.'],['N','Bus yang kutunggu akhirnya datang. Raka tidak bergerak dari tempatnya.'],['P','Lo nggak naik?'],['R','Bukan bus gue.'],['P','Terus lo pulang naik apa?'],['R','Jalan.'],['P','Dalam hujan?'],['R','Payungnya buat lo. Besok balikin.'],['N','Aku naik sambil memegang payung itu erat-erat. Dari jendela bus, dia masih berdiri di halte, basah, dan tersenyum.']]},
+s6b:{bg:'field',n:'s6c',l:[['N','Hari festival. Gerbang sekolah penuh balon dan spanduk Arunika. Aku datang pagi-pagi sekali.'],['R','Lo datang.'],['P','Gue panitia.'],['R','Gue kira lo bakal kabur.'],['P','Gue memang mau pulang tepat waktu. Tapi bukan hari ini.'],['R','Berarti gue menang.'],['P','Nggak ada taruhan.'],['R','Ada. Cuma lo nggak tahu.'],['Y','Woi! Sound system ngadat!'],['N','Raka menghela napas, lalu menoleh sebentar padaku.'],['R','Lo ikut?'],['N','Aku mengangguk dan berlari mengikutinya.']]},
+s2b:{bg:'sunset',n:'s3',l:[['N','Jam tiga. Aku datang tepat waktu, hanya supaya bisa membuktikan jawaban sebentar itu salah.'],['R','Lo datang.'],['P','Gue cuma memastikan.'],['R','Dan?'],['P','Ini sudah lewat sepuluh menit.'],['R','Oke. Gue salah.'],['N','Ruang OSIS penuh anak kelas sepuluh sampai dua belas. Raka berdiri di depan papan tulis, suaranya tenang tapi tidak sombong.'],['R','Divisi acara: {P}. Lo pegang rundown.'],['P','Gue? Kenapa gue?'],['R','Lo selalu keluar kelas paling cepat. Berarti lo paling peduli jam selesai.'],['P','Itu logikanya dari mana?'],['R','Dari ngamatin.'],['N','Beberapa orang tertawa. Aku pura-pura mencatat.'],['N','Rapat selesai dan anak-anak berhamburan. Aku memasukkan kertas rundown ke tas.'],['R','Besok datang lagi, kan?'],['P','Kalau ada rapat.'],['R','Ada.'],['P','Kapan selesainya?'],['R','Setiap hari sampai festival.'],['P','Itu bukan jawaban.'],['R','Tapi lo tetap datang, kan?'],['N','Aku tidak menjawab. Mungkin itu jawabannya.']]},
+s6c:{bg:'back',n:'s6d',l:[['N','Menjelang pembukaan, aku menemukan Raka di balik panggung, memegang kertas pidato yang sudah lecek.'],['R','Lo ngapain di sini?'],['P','Nyari ketua. Katanya hilang.'],['R','Gue nggak hilang. Gue sembunyi.'],['P','Itu sama aja.'],['R','Beda.'],['N','Dia tertawa kecil, lalu terdiam.'],['R','Pidatonya cuma tiga kalimat. Tapi tangan gue nggak mau berhenti gemetar.'],['P','Mau gue temenin?'],['R','Lo di sini aja.'],['N','Aku berdiri di sampingnya sampai namanya dipanggil.'],['R','Makasih udah nggak ngomong apa-apa.'],['N','Dia menarik napas panjang, merapikan kertas pidatonya, lalu melangkah ke depan.'],['N','Dari balik tirai, aku mendengar tepuk tangan. Tiga kalimat itu ternyata cukup.']]},
+s6d:{bg:'cgfest',n:'s7',l:[['N','Pidato Raka cuma tiga kalimat, dan tidak ada yang tahu tangannya sempat gemetar.'],['N','Setelahnya festival berjalan seperti mimpi: bazar, band, pentas drama, antrean cilok yang tidak ada ujungnya.'],['Y','{P}! Lo harus coba cilok ini!'],['P','Gue lagi kerja.'],['Y','Sepuluh detik!'],['N','Aku menurut. Cilok itu pedas sekali sampai mataku berair.'],['R','Lo nangis?'],['P','Pedas.'],['R','Nih.'],['N','Raka menyodorkan sebotol air. Bukan teh manis.'],['P','Lo masih ingat?'],['R','Susah lupa.'],['Y','Susah lupa katanya.'],['N','Aku pura-pura tidak mendengar. Telingaku, sayangnya, tidak bisa pura-pura.']],
+ c:[['"Makasih. Gue juga nggak lupa kok."',8,['R','Oh ya?']],['"Jangan geer."',3,['R','Telat.']],['"Gue bisa beli sendiri."',0,['R','Iya. Gue tahu.']]]},
+good:{bg:'cgnight',n:'@fin',l:[['N','Lampion masih menyala saat festival hampir usai. Raka berdiri di sampingku, lebih dekat dari biasanya.'],['R','Besok pulang bareng?'],['P','Rumah kita beda arah.'],['R','Gue tahu.'],['P','Terus?'],['R','Gue tetap mau.'],['P','Kenapa?'],['N','Raka tersenyum.'],['R','Karena gue sekarang punya alasan buat nggak langsung pulang.'],['N','Aku tidak menjawab. Tapi kali ini, aku juga tidak bilang tidak.']]},
+normal:{bg:'night',n:'@fin',l:[['N','Kami berjalan keluar aula bersisian, tanpa banyak bicara. Gerbang sudah sepi.'],['R','Hari ini lumayan, ya.'],['P','Lumayan.'],['R','Capek?'],['P','Banget.'],['R','Sama.'],['R','Sampai besok.'],['P','Sampai besok.'],['N','Raka berjalan pergi. Aku melihat punggungnya sampai menghilang di ujung koridor.'],['N','Entah kenapa, aku merasa cerita ini belum benar-benar selesai.']]}};
+const IMG={neutral:"raka_neutral.webp",soft:"raka_soft.webp",smirk:"raka_smirk.webp",blushed:"raka_blushed.webp",serious:"raka_serious.webp",surprised:"raka_surprised.webp"};
+const NY={happy:"naya_happy.webp",teasing:"naya_teasing.webp",curious:"naya_curious.webp",suspicious:"naya_suspicious.webp",surprised:"naya_surprised.webp",laughing:"naya_laughing.webp"};
+const BG={gate:"bg_school_gate_morning.webp",class:"bg_class_morning.webp",sunset:"bg_class_sunset.webp",hall:"bg_school_hallway_.webp",canteen:"bg_canteen.webp",rain:"bg_school_gate_rain.webp",aula:"bg_aula_festival.webp",back:"bg_backstage.webp",field:"bg_school_field.webp",night:"bg_empty_hall_night.webp",cgumb:"cg_umbrella.webp",cgfest:"cg_festival_group.webp",cgnight:"cg_festival_night.webp",title:"cg_raka_gate.webp"};
+const exy=t=>/GUE TAHU|Becanda|Salah jendelanya|Lo tuh aneh|Telat/.test(t)?'laughing':/Lo suka dia|Telinga lo merah|Muka lo|Susah lupa|Halo, Kak Ketua|Lo nggak romantis|Lo tuh kalau|Itu jawaban/.test(t)?'teasing':/es jeruk|nyimpen kursi|Gue nggak bilang|Gue lihat semuanya/.test(t)?'suspicious':/\?!|Woi|HAH|Sepuluh detik/.test(t)?'surprised':/\?$/.test(t)?'curious':'happy';
+const ex=t=>/Telinga|Berarti gue menang|Telat\.|Silakan|Dua-duanya|Bu Ketua|Jangan bilang|bakal kabur|Mata lo|ngomel|nyariin gue|Cuma lo nggak tahu/.test(t)?'smirk':/takut|gemetar|sembunyi|nggak tenang|Gue salah|sengaja nungguin|lebih jelas|Nanti\./.test(t)?'serious':/Nggak tahu|Jangan geer/.test(t)?'blushed':/Makasih|senang|Susah lupa|nemenin|Gue tunggu|Lo di sini|buru-buru|Pelan|Bagus\./.test(t)?'soft':/^(Oh|Lo datang|Lo beneran|Lo nangis|Lo belum pulang)/.test(t)?'surprised':'neutral';
+function fb(i,c){const d=document.createElement('div');d.className='sp '+c;d.textContent=c=='R'?'R':'N';i.replaceWith(d)}
+const NAMES={R:'Raka',Y:'Naya'},K='jpt_save',SK='jpt_set',app=document.getElementById('app');
+let mem={},st,rq=null,typing=null,full='',last=null,rx='neutral',ry='happy',
+ set=Object.assign({m:1,f:1,sp:'Normal'},ld(SK)||{});
+function ld(k){try{return JSON.parse(localStorage.getItem(k))||mem[k]||null}catch(e){return mem[k]||null}}
+function sv(k,v){mem[k]=v;try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
+function del(k){delete mem[k];try{localStorage.removeItem(k)}catch(e){}}
+const esc=s=>s.replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+function save(){sv(K,st)}
+function title(){clearInterval(typing);typing=null;const has=ld(K);
+ app.innerHTML=`<div class="scr"><h1>Jam Pulang<br>Terakhir</h1><p>A Short Otome Story</p>
+ <button class="btn p" id="b1">Mulai</button><button class="btn" id="b2" ${has?'':'disabled'}>Lanjutkan</button><button class="btn" id="b3">Pengaturan</button></div>`;
+ app.firstChild.style.background='linear-gradient(rgba(42,26,54,.25),rgba(42,26,54,.85)),url('+BG.title+') center 30%/cover';b1.onclick=()=>has?confirmNew():nameScr();b2.onclick=()=>{st=has;rq=null;game()};b3.onclick=()=>settings(title)}
+function confirmNew(){ask('Mulai ulang game dari awal?','Mulai ulang',()=>{del(K);nameScr()},title)}
+function ask(q,ok,yes,no){const o=document.createElement('div');o.className='ov';o.innerHTML=`<h2>${q}</h2><button class="btn p" id="y">${ok}</button><button class="btn" id="x">Batal</button>`;app.appendChild(o);o.querySelector('#y').onclick=()=>{o.remove();yes()};o.querySelector('#x').onclick=()=>{o.remove();no&&no()}}
+function nameScr(){app.innerHTML=`<div class="scr"><h2>Masukkan namamu</h2><input id="in" maxlength="16" placeholder="Nama kamu" autocomplete="off"><button class="btn p" id="go" disabled>Mulai</button></div>`;
+ in_=document.getElementById('in');const g=document.getElementById('go');in_.oninput=()=>g.disabled=!in_.value.trim();
+ g.onclick=()=>{st={n:in_.value.trim().slice(0,16),a:0,s:'s0',i:0,end:null};rq=null;save();game()}}
+function settings(back){const o=document.createElement('div');o.className='ov';
+ const draw=()=>{o.innerHTML=`<h2>Pengaturan</h2><div class="row"><span>Musik</span><button class="btn ${set.m?'on':''}" data-k="m">${set.m?'ON':'OFF'}</button></div><div class="row"><span>Sound FX</span><button class="btn ${set.f?'on':''}" data-k="f">${set.f?'ON':'OFF'}</button></div><div class="row">${['Slow','Normal','Fast'].map(s=>`<button class="btn ${set.sp==s?'on':''}" data-s="${s}">${s}</button>`).join('')}</div><button class="btn p" id="cl">Tutup</button>`;
+ o.querySelectorAll('[data-k]').forEach(b=>b.onclick=()=>{set[b.dataset.k]^=1;sv(SK,set);draw()});o.querySelectorAll('[data-s]').forEach(b=>b.onclick=()=>{set.sp=b.dataset.s;sv(SK,set);draw()});o.querySelector('#cl').onclick=()=>o.remove()};
+ draw();app.appendChild(o)}
+const lines=()=>rq||S[st.s].l.filter(l=>!l[2]||st.a>=l[2]);
+function game(){app.innerHTML=`<div class="g"><button class="top" id="mn">Menu</button><div class="stage" id="stg"></div><div class="dlg" id="dl"><div class="nm" id="nm"></div><p class="tx" id="tx"></p><span class="nx">ketuk ▾</span></div></div>`;
+ mn.onclick=menu;dl.onclick=tap;draw()}
+function menu(){const o=document.createElement('div');o.className='ov';o.innerHTML=`<h2>Menu</h2><button class="btn p" id="a">Lanjut main</button><button class="btn" id="b">Pengaturan</button><button class="btn" id="c">Restart Game</button><button class="btn" id="d">Ke judul</button>`;app.appendChild(o);
+ o.querySelector('#a').onclick=()=>o.remove();o.querySelector('#b').onclick=()=>settings();o.querySelector('#d').onclick=()=>{o.remove();title()};
+ o.querySelector('#c').onclick=()=>{o.remove();ask('Mulai ulang game dari awal?','Mulai ulang',()=>{del(K);nameScr()},menu)}}
+function draw(){clearInterval(typing);const sc=S[st.s],L=lines(),l=L[Math.min(st.i,L.length-1)],w=l[0];
+ stg.className='stage bg-'+sc.bg;const bi=BG[sc.bg];stg.style.backgroundImage=bi?`url(${bi})`:'';stg.style.backgroundSize='cover';stg.style.backgroundPosition='center 35%';if(w=='R'||w=='Y')last=w;if(w=='R')rx=ex(l[1]);if(w=='Y')ry=exy(l[1]);
+ stg.innerHTML=sc.bg.startsWith('cg')?'':last=='R'?`<img class="rk" alt="Raka" src="${IMG[rx]}" onerror="fb(this,'R')">`:last=='Y'?`<img class="rk ny" alt="Naya" src="${NY[ry]}" onerror="fb(this,'Y')">`:'';
+ nm.style.display=w=='N'?'none':'block';nm.textContent=w=='P'?st.n:NAMES[w];
+ tx.className='tx'+(w=='N'?' n':'');full=l[1].replace(/\{P\}/g,st.n);
+ const ms={Slow:45,Normal:22,Fast:8}[set.sp];let p=0;tx.textContent='';
+ typing=setInterval(()=>{tx.textContent=full.slice(0,++p);if(p>=full.length)fin()},ms)}
+function fin(){clearInterval(typing);typing=null;tx.textContent=full;
+ const L=lines();if(st.i>=L.length-1&&!rq&&S[st.s].c)choices()}
+function choices(){const o=document.createElement('div');o.className='ch';o.id='chs';
+ S[st.s].c.forEach(c=>{const b=document.createElement('button');b.className='btn';b.textContent=c[0];b.onclick=()=>{st.a+=c[1];o.remove();rq=[c[2]];const nx=S[st.s].n;st.s=nx=='@end'?(st.a>=30?'good':'normal'):nx;st.i=0;save();draw()};o.appendChild(b)});
+ app.firstChild.appendChild(o)}
+function tap(){if(document.getElementById('chs'))return;if(typing){fin();return}
+ const L=lines();
+ if(st.i<L.length-1){st.i++;save();draw();return}
+ if(rq){rq=null;st.i=0;save();draw();return}
+ const sc=S[st.s];if(sc.c)return;
+ if(sc.n=='@fin')return epilogue();
+ st.s=sc.n;st.i=0;save();draw()}
+function epilogue(){st.end=st.s;del(K);app.innerHTML=`<div class="scr"><h2>THE END</h2><h1 style="font-size:34px">Jam Pulang Terakhir</h1><p>"Sometimes, the best part of the day is the part you didn't plan."</p><button class="btn p" id="pa">Play again</button><button class="btn" id="bt">Back to title</button></div>`;
+ pa.onclick=nameScr;bt.onclick=title}
+window.addEventListener('load',()=>{try{if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js').catch(()=>{})}catch(e){}});
+title();
+</script></body></html>
